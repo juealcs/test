@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vllm-agent-project"
+version = "0.1.0"
+description = "Plan-execute-review agent powered by a local vLLM model"
+requires-python = ">=3.10"
+dependencies = [
+  "agent-framework",
+  "pydantic>=2.8",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24"]
+
+[project.scripts]
+solve = "agentic_solver.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentic_solver"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
